@@ -1,12 +1,18 @@
+import { useState } from 'react'
 import './Navbar.css'
 
 
 const Navbar = () => {
   const liStyles = 'list-none py-0 px-[20px] relative'
   const li_a_Styles = 'no-underline text-[1.3rem] font-bold text-white hover:text-[#17cf97] ease-in-out duration-300 '
+  const [isClicked, setIsClicked] = useState(false)
+  
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  }
+  
   return (
    <>
-
       <nav className='navbar flex items-center justify-between bg-[#1b2430] py-[20px] px-[80px] shadow-sm
         '>
         <a href='index.html'>
@@ -27,6 +33,9 @@ const Navbar = () => {
               <a className={li_a_Styles} href='index.html'>Contact</a>
             </li>
           </ul>
+        </div>
+        <div id='mobile' onClick={handleClick} >
+          <i id='bar' className={isClicked ? 'fas fa-times' : 'fas fa-bars'} ></i>
         </div>
       </nav>
 
