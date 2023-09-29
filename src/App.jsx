@@ -1,6 +1,7 @@
 
 import './App.css'
-import Navbar from './components/Navbar'
+// import Navbar from './components/Navbar/Navbar'
+import Select from './components/Select/Select'
 
 function App() {
 
@@ -8,7 +9,8 @@ function App() {
   return (
     <>
       <div className='flex justify-center'>
-        <Navbar />
+        {/* <Navbar /> */}
+        <Select />
       </div>
     </>
   )
