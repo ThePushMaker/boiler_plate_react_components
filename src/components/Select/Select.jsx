@@ -6,7 +6,7 @@ const Select = () => {
   const [isActive, setIsActive] = useState(false);
   const [selectBtn, setSelectBtn] = useState("Select Country");
   const [searchInp, setSearchInp] = useState('');
-
+  const [filteredCountries, setFilteredCountries] = useState([]); // Nuevo estado para almacenar los países filtrados
   
   
   const toggleSelect = () => {
@@ -17,24 +17,23 @@ const Select = () => {
 
   const updateName = (selectedLi) => {
     setSelectBtn(selectedLi)
+    setIsActive(false); // Cerrar la lista después de seleccionar un país
   }
-  
 
   // Función para manejar cambios en el input de búsqueda
   const handleSearchInputChange = (event) => {
     const inputValue = event.target.value;
     setSearchInp(inputValue);
-    console.log(inputValue);
     
-    let array = [];
     const searchedVal = inputValue.toLowerCase();
-    // returning all data from array which starts with user searched value
-    array = countries.filter(data => {
-      return data.toLowerCase().startsWith(searchedVal);
-    });
-    console.log(array)
-     
-  }
+    // Filtrar los países que coinciden con la búsqueda
+    const filtered = countries.filter(data => {
+      return data.toLowerCase().includes(searchedVal); // Usar includes para buscar en cualquier parte del nombre
+    })
+    
+    setFilteredCountries(filtered); // Actualizar el estado de países filtrados
+}
+
   
 
   return(
@@ -50,7 +49,7 @@ const Select = () => {
             <input type="text" placeholder='Search' value={searchInp} onChange={handleSearchInputChange}/>
           </div>
           <ul className="options">
-            {countries.map((item, index) => (
+            {filteredCountries.map((item, index) => (
               <li key={index} onClick={() => updateName(item)}>
                 {item}
               </li>
