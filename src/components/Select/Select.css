@@ -29,6 +29,10 @@ body {
 }
 .select-btn i {
   font-size: 31px;
+  transition: transform 0.3s linear;
+}
+.wrapper.active .select-btn i {
+  transform: rotate(-180deg);
 }
 .content {
   display: none;
