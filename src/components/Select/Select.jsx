@@ -4,12 +4,15 @@ import { useEffect, useState, useRef } from 'react';
 const Select = () => {
   const [isActive, setIsActive] = useState(false);
   const [selectBtn, setSelectBtn] = useState("Select Country");
-  const [searchInp, setSearchInp] = useState('');
-  const [filteredCountries, setFilteredCountries] = useState([]);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [searchData, setSearchData] = useState({
+    searchInp: '',
+    filteredCountries: [],
+    hasSearched: false,
+  });
   const [selectedCountry, setSelectedCountry] = useState(null);
 
   const wrapperRef = useRef(null); // Ref para el div contenedor del select
+  const inputRef = useRef(null); // Ref para el elemento input del campo de búsqueda
 
   const toggleSelect = () => {
     setIsActive(!isActive);
@@ -17,6 +20,11 @@ const Select = () => {
 
   const closeSelect = () => {
     setIsActive(false);
+    setSearchData(prevData => ({
+      ...prevData,
+      searchInp: '', // Establecer el campo de búsqueda en una cadena vacía al cerrar el select
+      filteredCountries: countries,
+    }));
   }
 
   const handleClickOutside = (event) => {
@@ -31,6 +39,13 @@ const Select = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (isActive) {
+      // Cuando se activa el select, establece el enfoque en el campo de búsqueda
+      inputRef.current.focus();
+    }
+  }, [isActive]);
 
   useEffect(() => {
     if (isActive && selectedCountry) {
@@ -48,15 +63,12 @@ const Select = () => {
 
   const handleSearchInputChange = (event) => {
     const inputValue = event.target.value;
-    setSearchInp(inputValue);
-
-    const searchedVal = inputValue.toLowerCase();
-    const filtered = countries.filter(data => {
-      return data.toLowerCase().includes(searchedVal);
-    })
-
-    setFilteredCountries(filtered);
-    setHasSearched(true);
+    setSearchData(prevData => ({
+      ...prevData,
+      searchInp: inputValue,
+      hasSearched: true,
+      filteredCountries: countries.filter(data => data.toLowerCase().includes(inputValue.toLowerCase())),
+    }));
   }
 
   return (
@@ -69,12 +81,18 @@ const Select = () => {
         <div className="content">
           <div className="search">
             <i className="uil uil-search"></i>
-            <input type="text" placeholder='Search' value={searchInp} onChange={handleSearchInputChange} />
+            <input
+              type="text"
+              placeholder='Search'
+              value={searchData.searchInp}
+              onChange={handleSearchInputChange}
+              ref={inputRef} // Asigna la referencia al elemento input
+            />
           </div>
           <ul className="options">
-            {hasSearched ? (
-              filteredCountries.length > 0 ? (
-                filteredCountries.map((item, index) => (
+            {searchData.hasSearched ? (
+              searchData.filteredCountries.length > 0 ? (
+                searchData.filteredCountries.map((item, index) => (
                   <li
                     key={index}
                     onClick={() => updateName(item)}
