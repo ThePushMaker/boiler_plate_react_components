@@ -12,7 +12,7 @@ body {
 }
 .wrapper {
   width: 370px;
-  margin: 130px auto 0;
+  margin: 0 auto 0;
 }
 .select-btn, .options li {
   cursor: pointer;
@@ -31,10 +31,14 @@ body {
   font-size: 31px;
 }
 .content {
+  display: none;
   padding: 20px;
   margin-top: 15px;
   border-radius: 7px;
   background: #fff;
+}
+.wrapper.active .content {
+  display: block;
 }
 .content .search {
   position: relative;
@@ -60,6 +64,21 @@ body {
   max-height: 250px;
   overflow-y: auto;
 }
+.options::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 25px;
+}
+.options::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 25px;
+}
+.options::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 25px;
+}
+
+
+
 .options li {
   height: 50px;
   border-radius: 5px;

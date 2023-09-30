@@ -1,11 +1,18 @@
 import './Select.css'
+import { useState } from 'react';
 
 const Select = () => {
+  
+  const [isActive, setIsActive] = useState(false);
+  
+  const toggleSelect = () => {
+    setIsActive(!isActive);
+  }
 
   return(
-    <div>
-      <div className="wrapper">
-        <div className="select-btn">
+    <div className='mt-5'>
+      <div className={`wrapper ${isActive ? 'active' : ''}`}>
+        <div className="select-btn" onClick={toggleSelect}>
           <span>Select Country</span>
           <i className="uil uil-angle-down"></i>
         </div>
