@@ -1,5 +1,8 @@
-/* import Google Font Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  --elementWidth: 160px;
+}
+
 *{
   margin: 0;
   padding: 0;
@@ -7,11 +10,10 @@
   font-family: 'Poppins', sans-serif;
   color: #555;
 }
-body {
-  background: #4285f4;
-}
+
 .wrapper {
-  width: 370px;
+  color: #555;
+  width: var(--elementWidth);
   margin: 0 auto 0;
 }
 .select-btn, .options li {
@@ -21,35 +23,44 @@ body {
 }
 .select-btn {
   border-radius: 7px;
+  color: #555;
+  /* border: white solid 1px; */
   background: #fff;
-  font-size: 22px;
-  height: 65px;
+  /* background: transparent; */
+  font-size: 23px;
+  height: 50px;
   padding: 0 20px;
   justify-content: space-between;
 }
-.select-btn i {
+.select-btn img {
+  width: 15px;;
   font-size: 31px;
   transition: transform 0.3s linear;
 }
-.wrapper.active .select-btn i {
+.wrapper.active .select-btn img {
   transform: rotate(-180deg);
 }
 .content {
   display: none;
-  padding: 20px;
-  margin-top: 15px;
+  padding: 14px;
+  margin-top: 5px;
   border-radius: 7px;
   background: #fff;
 }
 .wrapper.active .content {
   display: block;
+  position: absolute;
+  width: var(--elementWidth);
 }
 .content .search {
   position: relative;
+  display: flex;
+  align-items: center;
 }
-.search i {
+.search img {
+  width: 20px;
   left: 15px;
-  color: #999;
+  color: #555;
   font-size: 20px;
   line-height: 53px;
   position: absolute;
@@ -86,8 +97,11 @@ body {
   height: 50px;
   border-radius: 5px;
   padding: 0 13px;
-  font-size: 21px;
+  font-size: 20px;
 }
-.options li:hover, li.selected{
+.options li:hover, li.selected {
   background: #f2f2f2;
+}
+.options p {
+  font-size: 18px;
 }
