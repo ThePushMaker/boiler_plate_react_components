@@ -2,15 +2,6 @@
 :root {
   --elementWidth: 160px;
 }
-
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-  color: #555;
-}
-
 .wrapper {
   color: #555;
   width: var(--elementWidth);
@@ -23,17 +14,15 @@
 }
 .select-btn {
   border-radius: 7px;
-  color: #555;
+  color: white;
   /* border: white solid 1px; */
-  background: #fff;
-  /* background: transparent; */
-  font-size: 23px;
+  background: transparent;
   height: 50px;
   padding: 0 20px;
   justify-content: space-between;
 }
 .select-btn img {
-  width: 15px;;
+  width: 30px;
   font-size: 31px;
   transition: transform 0.3s linear;
 }
@@ -41,16 +30,19 @@
   transform: rotate(-180deg);
 }
 .content {
-  display: none;
+  display: hidden;
+  position: absolute;
+  opacity:0;
   padding: 14px;
   margin-top: 5px;
   border-radius: 7px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
+  width: var(--elementWidth);
+  transition: opacity 0.25s linear;
 }
 .wrapper.active .content {
-  display: block;
-  position: absolute;
-  width: var(--elementWidth);
+  /* display: block; */
+  opacity:100;
 }
 .content .search {
   position: relative;
